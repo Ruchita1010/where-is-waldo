@@ -9,9 +9,3 @@
     var(--bg-secondary) 100%
   );
 }
-
-.title {
-  margin-bottom: 4rem;
-  font-size: clamp(3rem, 4vmax, 4rem);
-  text-align: center;
-}

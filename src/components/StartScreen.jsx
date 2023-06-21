@@ -21,7 +21,8 @@ export const StartScreen = () => {
 
   return (
     <>
-      <main className={styles.startScreen}>
+      <h1 className={styles.title}>WHERE'S WALDO?</h1>
+      <main className={styles.content}>
         <p>Search Waldo and his friends in...</p>
         <div className={styles.puzzleContainer}>
           {puzzles.map((puzzle) => (
