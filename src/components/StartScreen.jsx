@@ -1,23 +1,18 @@
-import { useEffect, useState } from 'react';
 import { Puzzle } from './Puzzle';
-import { retrieveStoredData } from '../firebase/firebaseDataActions';
+import { useDataFetch } from '../hooks/useDataFetch';
 import styles from '../styles/StartScreen.module.css';
 
 export const StartScreen = () => {
-  const [puzzles, setPuzzles] = useState([]);
+  /* setting a default value of an empty array ([]) to ensure that puzzles is always an array, even if the data is still loading */
+  const { data: puzzles = [], isLoading, error } = useDataFetch();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await retrieveStoredData();
-        setPuzzles(data);
-      } catch (error) {
-        console.log(`Error fetching the data: ${error}`);
-      }
-    };
+  if (isLoading) {
+    return <p>Loading...（︶^︶）</p>;
+  }
 
-    fetchData();
-  }, []);
+  if (error) {
+    return <p>Some Error Occurred...（╯^╰）</p>;
+  }
 
   return (
     <>
