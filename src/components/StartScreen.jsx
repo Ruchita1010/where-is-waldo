@@ -1,4 +1,5 @@
 import { Puzzle } from './Puzzle';
+import { MessageScreen } from './MessageScreen';
 import { useDataFetch } from '../hooks/useDataFetch';
 import styles from '../styles/StartScreen.module.css';
 
@@ -7,11 +8,11 @@ export const StartScreen = () => {
   const { data: puzzles = [], isLoading, error } = useDataFetch();
 
   if (isLoading) {
-    return <p>Loading...（︶^︶）</p>;
+    return <MessageScreen message={'Loading...（︶^︶）'} />;
   }
 
   if (error) {
-    return <p>Some Error Occurred...（╯^╰）</p>;
+    return <MessageScreen message={'Some Error Occurred...（╯^╰）'} />;
   }
 
   return (

@@ -1,0 +1,8 @@
+.messageScreen {
+  width: 100%;
+  min-height: 100vh;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  font-size: clamp(1rem, 3vmax, 3rem);
+}
