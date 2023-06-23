@@ -9,4 +9,5 @@
   --bg-primary: hsl(240, 6%, 10%);
   --bg-secondary: hsl(0, 0%, 15%);
   --bg-secondary-transparent: hsla(240, 10%, 4%, 0.35);
+  --border-color-transparent: hsla(210, 8%, 95%, 0.18);
 }
