@@ -3,7 +3,7 @@ import { MessageScreen } from './MessageScreen';
 import { useDataFetch } from '../hooks/useDataFetch';
 import styles from '../styles/StartScreen.module.css';
 
-export const StartScreen = () => {
+export const StartScreen = ({ setActivePuzzle }) => {
   /* setting a default value of an empty array ([]) to ensure that puzzles is always an array, even if the data is still loading */
   const { data: puzzles = [], isLoading, error } = useDataFetch();
 
@@ -22,7 +22,11 @@ export const StartScreen = () => {
         <p>Search Waldo and his friends in...</p>
         <div className={styles.puzzleContainer}>
           {puzzles.map((puzzle) => (
-            <Puzzle key={puzzle.id} puzzle={puzzle} />
+            <Puzzle
+              key={puzzle.id}
+              puzzle={puzzle}
+              setActivePuzzle={setActivePuzzle}
+            />
           ))}
         </div>
       </main>
