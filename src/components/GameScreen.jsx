@@ -1,8 +1,31 @@
+import { useRef, useState } from 'react';
 import { Character } from './Character';
+import { CharacterOptionsPopup } from './CharacterOptionsPopup';
+import { calculatePopupPosition } from '../utils/popupUtils';
 import styles from '../styles/GameScreen.module.css';
 
 export const GameScreen = ({ puzzle }) => {
   const { image, location, characters } = puzzle;
+  const [popup, setPopup] = useState({
+    isOpen: false,
+    style: { position: 'absolute', top: 0, left: 0 },
+  });
+  const parentRef = useRef(null);
+  const popupRef = useRef(null);
+
+  const showPopUp = (e) => {
+    const X = e.pageX + e.currentTarget.scrollLeft;
+    const Y = e.pageY + e.currentTarget.scrollTop;
+    const parentElement = parentRef.current;
+    const popupElement = popupRef.current;
+
+    const { x, y } = calculatePopupPosition(X, Y, parentElement, popupElement);
+
+    setPopup({
+      isOpen: true,
+      style: { position: 'absolute', left: `${x}px`, top: `${y}px` },
+    });
+  };
 
   return (
     <div className={styles.gameScreen}>
@@ -20,9 +43,14 @@ export const GameScreen = ({ puzzle }) => {
         <p className={styles.timer}>00:00:00</p>
       </div>
       <main>
-        <div className={styles.puzzleImageContainer}>
-          <img src={image} alt={location} />
+        <div className={styles.puzzleImageContainer} ref={parentRef}>
+          <img src={image} alt={location} onClick={showPopUp} />
         </div>
+        <CharacterOptionsPopup
+          characters={characters}
+          popup={popup}
+          ref={popupRef}
+        />
       </main>
     </div>
   );
