@@ -1,31 +1,56 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Character } from './Character';
 import { CharacterOptionsPopup } from './CharacterOptionsPopup';
+import { useOutsideClick } from '../hooks/useOutsideClick';
 import { calculatePopupPosition } from '../utils/popupUtils';
 import styles from '../styles/GameScreen.module.css';
 
 export const GameScreen = ({ puzzle }) => {
   const { image, location, characters } = puzzle;
   const [popup, setPopup] = useState({
-    isOpen: false,
-    style: { position: 'absolute', top: 0, left: 0 },
+    open: false,
+    position: { x: 0, y: 0 },
   });
+  const [coords, setCoords] = useState({ x: 0, y: 0 });
+
   const parentRef = useRef(null);
   const popupRef = useRef(null);
 
-  const showPopUp = (e) => {
-    const X = e.pageX + e.currentTarget.scrollLeft;
-    const Y = e.pageY + e.currentTarget.scrollTop;
+  const handleImageClick = (e) => {
+    const x = e.pageX + e.currentTarget.scrollLeft;
+    const y = e.pageY + e.currentTarget.scrollTop;
+    setCoords({ x, y });
+    setPopup((prevPopup) => ({
+      ...prevPopup,
+      open: true,
+    }));
+  };
+
+  useEffect(() => {
     const parentElement = parentRef.current;
     const popupElement = popupRef.current;
 
-    const { x, y } = calculatePopupPosition(X, Y, parentElement, popupElement);
+    const { x, y } = calculatePopupPosition(
+      coords.x,
+      coords.y,
+      parentElement,
+      popupElement
+    );
 
-    setPopup({
-      isOpen: true,
-      style: { position: 'absolute', left: `${x}px`, top: `${y}px` },
-    });
+    setPopup((prevPopup) => ({
+      ...prevPopup,
+      position: { x, y },
+    }));
+  }, [coords]);
+
+  const closePopup = () => {
+    setPopup((prevPopup) => ({
+      ...prevPopup,
+      open: false,
+    }));
   };
+
+  useOutsideClick(parentRef, closePopup);
 
   return (
     <div className={styles.gameScreen}>
@@ -44,11 +69,12 @@ export const GameScreen = ({ puzzle }) => {
       </div>
       <main>
         <div className={styles.puzzleImageContainer} ref={parentRef}>
-          <img src={image} alt={location} onClick={showPopUp} />
+          <img src={image} alt={location} onClick={handleImageClick} />
         </div>
         <CharacterOptionsPopup
           characters={characters}
           popup={popup}
+          coords={coords}
           ref={popupRef}
         />
       </main>
