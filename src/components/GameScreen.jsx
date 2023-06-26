@@ -68,8 +68,13 @@ export const GameScreen = ({ puzzle }) => {
         <p className={styles.timer}>00:00:00</p>
       </div>
       <main>
-        <div className={styles.puzzleImageContainer} ref={parentRef}>
-          <img src={image} alt={location} onClick={handleImageClick} />
+        <div className={styles.puzzleImageContainer}>
+          <img
+            src={image}
+            alt={location}
+            onClick={handleImageClick}
+            ref={parentRef}
+          />
         </div>
         <CharacterOptionsPopup
           characters={characters}
