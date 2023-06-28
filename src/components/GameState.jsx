@@ -1,6 +1,7 @@
+import { formatTime } from '../utils/timeUtils';
 import styles from '../styles/GameState.module.css';
 
-export const GameState = ({ characters, foundCharacters }) => {
+export const GameState = ({ characters, foundCharacters, time }) => {
   return (
     <div className={styles.gameStateDisplay}>
       <div className={styles.characterContainer}>
@@ -15,7 +16,7 @@ export const GameState = ({ characters, foundCharacters }) => {
           </div>
         ))}
       </div>
-      <p className={styles.timer}>00:00:00</p>
+      <p className={styles.timer}>{formatTime(time)}</p>
     </div>
   );
 };

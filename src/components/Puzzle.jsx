@@ -4,7 +4,7 @@ import { truncateDecimal } from '../utils/coordinatesUtils.js';
 import { isCoordinateMatch } from '../utils/coordinatesUtils.js';
 import styles from '../styles/Puzzle.module.css';
 
-export const Puzzle = ({ puzzle, setFoundCharacters }) => {
+export const Puzzle = ({ puzzle, setFoundCharacters, startTimer }) => {
   const { image, location, characters } = puzzle;
 
   const [coords, setCoords] = useState({ x: 0, y: 0 });
@@ -23,6 +23,11 @@ export const Puzzle = ({ puzzle, setFoundCharacters }) => {
       x: e.nativeEvent.offsetX,
       y: e.nativeEvent.offsetY,
     });
+  };
+
+  /* start timer when the puzzle image has finished loading! It doesn't makes sense to start the time as soon as the component mounts when the image hasn't loaded*/
+  const handleImageLoad = () => {
+    startTimer();
   };
 
   const handleCharacterOptionClick = (name, position) => {
@@ -56,6 +61,7 @@ export const Puzzle = ({ puzzle, setFoundCharacters }) => {
           src={image}
           alt={location}
           onClick={handleImageClick}
+          onLoad={handleImageLoad}
           ref={parentRef}
         />
       </div>
