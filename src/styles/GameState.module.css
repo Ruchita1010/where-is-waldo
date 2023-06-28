@@ -38,3 +38,8 @@
   padding-left: 0.8rem;
   font-size: clamp(1.4rem, 3vmax, 4rem);
 }
+
+/* to change image to b/w when the character is found */
+.found {
+  filter: grayscale(1);
+}

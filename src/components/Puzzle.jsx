@@ -4,7 +4,7 @@ import { truncateDecimal } from '../utils/coordinatesUtils.js';
 import { isCoordinateMatch } from '../utils/coordinatesUtils.js';
 import styles from '../styles/Puzzle.module.css';
 
-export const Puzzle = ({ puzzle }) => {
+export const Puzzle = ({ puzzle, setFoundCharacters }) => {
   const { image, location, characters } = puzzle;
 
   const [coords, setCoords] = useState({ x: 0, y: 0 });
@@ -35,7 +35,10 @@ export const Puzzle = ({ puzzle }) => {
     );
 
     if (isMatched) {
-      console.log(`Found ${name}!`);
+      setFoundCharacters((prevFoundCharacters) => [
+        ...prevFoundCharacters,
+        name,
+      ]);
     }
   };
 
