@@ -30,12 +30,10 @@ export const Modal = ({ onSubmit, onCancel }) => {
             onChange={handleInputChange}
           />
           <div className={styles.modalBtns}>
-            <button type="button" className={styles.btn} onClick={onCancel}>
+            <button type="button" className="btn" onClick={onCancel}>
               CANCEL
             </button>
-            <button
-              type="submit"
-              className={`${styles.btn} ${styles.submitBtn}`}>
+            <button type="submit" className="btn" id={styles.submitBtn}>
               SUBMIT
             </button>
           </div>

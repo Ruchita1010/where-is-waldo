@@ -35,8 +35,8 @@ export const GameScreen = ({ puzzle }) => {
   return (
     <div className={styles.gameScreen}>
       <nav>
-        <button className={styles.btn}>HOME</button>
-        <button className={styles.btn}>LEADERBOARD</button>
+        <button className="btn">HOME</button>
+        <button className="btn">LEADERBOARD</button>
       </nav>
       <GameState
         characters={characters}

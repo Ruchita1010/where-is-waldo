@@ -10,17 +10,3 @@ nav {
   justify-content: space-between;
   margin-bottom: clamp(4rem, 4vmax, 8rem);
 }
-
-.btn {
-  padding: 0.6rem;
-  font-size: 0.8rem;
-  color: var(--text-color-normal);
-  background-color: var(--bg-primary);
-  border: 1px solid var(--text-color-normal);
-  border-radius: 6px;
-}
-
-.btn:hover {
-  cursor: pointer;
-  transform: scale(1.02);
-}

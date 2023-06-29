@@ -48,21 +48,7 @@ input[type='text']:focus {
   gap: 10px;
 }
 
-.btn {
-  padding: 0.8rem;
-  font-size: 0.8rem;
-  color: var(--text-color-normal);
-  background-color: var(--bg-primary);
-  border: 1px solid var(--border-color-transparent);
-  border-radius: 6px;
-}
-
-.btn:hover {
-  cursor: pointer;
-  transform: scale(1.02);
-}
-
-.submitBtn {
+#submitBtn {
   color: var(--color-text-dark);
   background-color: var(--color-bg-light);
 }
