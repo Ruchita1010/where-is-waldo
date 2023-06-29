@@ -10,4 +10,8 @@
   --bg-secondary: hsl(0, 0%, 15%);
   --bg-secondary-transparent: hsla(240, 10%, 4%, 0.35);
   --border-color-transparent: hsla(210, 8%, 95%, 0.18);
+
+  /* for situations where a white background is needed */
+  --color-text-dark: hsl(240, 6%, 10%);
+  --color-bg-light: hsl(210, 8%, 95%);
 }
