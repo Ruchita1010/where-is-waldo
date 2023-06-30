@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { usePopup } from '../hooks/usePopup';
+import { useEffect, useRef, useState } from 'react';
+import { calculatePopupPosition } from '../utils/popupUtils';
 import { truncateDecimal } from '../utils/coordinatesUtils.js';
 import { isCoordinateMatch } from '../utils/coordinatesUtils.js';
 import styles from '../styles/Puzzle.module.css';
@@ -7,27 +7,40 @@ import styles from '../styles/Puzzle.module.css';
 export const Puzzle = ({ puzzle, setFoundCharacters, startTimer }) => {
   const { image, location, characters } = puzzle;
 
-  const [coords, setCoords] = useState({ x: 0, y: 0 });
+  const [popup, setPopup] = useState({ open: false, position: { x: 0, y: 0 } });
   const [offsets, setOffsets] = useState({ x: 0, y: 0 });
-  const [popup, setPopup, parentRef, popupRef] = usePopup(coords);
+
+  const parentRef = useRef();
+  const popupRef = useRef();
+
+  // close popup if clicked outside the image
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (parentRef.current && !parentRef.current.contains(e.target)) {
+        setPopup((prevPopup) => ({
+          ...prevPopup,
+          open: false,
+        }));
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
 
   const handleImageClick = (e) => {
-    const x = e.pageX + e.currentTarget.scrollLeft;
-    const y = e.pageY + e.currentTarget.scrollTop;
-    setCoords({ x, y });
-    setPopup((prevPopup) => ({
-      ...prevPopup,
-      open: true,
-    }));
-    setOffsets({
-      x: e.nativeEvent.offsetX,
-      y: e.nativeEvent.offsetY,
-    });
-  };
-
-  /* start timer when the puzzle image has finished loading! It doesn't makes sense to start the time as soon as the component mounts when the image hasn't loaded*/
-  const handleImageLoad = () => {
-    startTimer();
+    const X = e.pageX + e.currentTarget.scrollLeft;
+    const Y = e.pageY + e.currentTarget.scrollTop;
+    const newPosition = calculatePopupPosition(
+      X,
+      Y,
+      parentRef.current,
+      popupRef.current
+    );
+    setPopup({ open: true, position: newPosition });
+    setOffsets({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY });
   };
 
   const handleCharacterOptionClick = (name, position) => {
@@ -50,9 +63,13 @@ export const Puzzle = ({ puzzle, setFoundCharacters, startTimer }) => {
     }
   };
 
+  /* start timer when the puzzle image has finished loading! It doesn't makes sense to start the time as soon as the component mounts when the image hasn't loaded*/
+  const handleImageLoad = () => {
+    startTimer();
+  };
+
   const popupStyles = {
-    display: popup.open ? 'block' : 'none',
-    position: 'absolute',
+    visibility: popup.open ? 'visible' : 'hidden',
     left: `${popup.position.x}px`,
     top: `${popup.position.y}px`,
   };

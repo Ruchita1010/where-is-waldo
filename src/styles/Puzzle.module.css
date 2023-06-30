@@ -10,8 +10,8 @@
 }
 
 .popup {
+  position: absolute;
   padding: 10px;
-  display: grid;
   font-size: 1rem;
   background-color: var(--bg-secondary-transparent);
   -webkit-backdrop-filter: blur(7px);
