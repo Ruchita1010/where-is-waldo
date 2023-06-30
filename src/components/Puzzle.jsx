@@ -40,10 +40,13 @@ export const Puzzle = ({ puzzle, setFoundCharacters, startTimer }) => {
     );
 
     if (isMatched) {
-      setFoundCharacters((prevFoundCharacters) => [
-        ...prevFoundCharacters,
-        name,
-      ]);
+      setFoundCharacters((prevFoundCharacters) => {
+        // ensure that the same character isn't added again
+        if (!prevFoundCharacters.includes(name)) {
+          return [...prevFoundCharacters, name];
+        }
+        return prevFoundCharacters;
+      });
     }
   };
 
