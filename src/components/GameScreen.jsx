@@ -29,7 +29,7 @@ export const GameScreen = ({ puzzle }) => {
     addToLeaderboard({ playerName, time }, id)
       .then(() => {
         setShowModal(false);
-        navigate('/leaderboard');
+        navigate(`/leaderboard/${id}`);
       })
       .catch((error) => {
         console.error('Error adding to leaderboard:', error);
@@ -46,7 +46,7 @@ export const GameScreen = ({ puzzle }) => {
         <Link to="/">
           <button className="btn">HOME</button>
         </Link>
-        <Link to="/leaderboard">
+        <Link to={`/leaderboard/${id}`}>
           <button className="btn">LEADERBOARD</button>
         </Link>
       </nav>

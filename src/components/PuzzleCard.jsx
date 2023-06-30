@@ -5,7 +5,7 @@ export const PuzzleCard = ({ puzzle, setActivePuzzle }) => {
   const { image, location } = puzzle;
 
   return (
-    <Link to="/game">
+    <Link to={`/game/${puzzle.id}`}>
       <div
         className={styles.puzzleCard}
         onClick={() => setActivePuzzle(puzzle)}>

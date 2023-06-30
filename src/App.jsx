@@ -22,9 +22,12 @@ const App = () => {
           path="/"
           element={<StartScreen setActivePuzzle={setActivePuzzle} />}
         />
-        <Route path="/game" element={<GameScreen puzzle={activePuzzle} />} />
         <Route
-          path="/leaderboard"
+          path="/game/:puzzleId"
+          element={<GameScreen puzzle={activePuzzle} />}
+        />
+        <Route
+          path="/leaderboard/:puzzleId"
           element={<Leaderboard puzzleId={activePuzzle.id} />}
         />
       </Routes>
