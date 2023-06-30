@@ -14,7 +14,7 @@ const firebaseConfig = {
 initializeApp(firebaseConfig);
 
 // init services
-const db = getFirestore();
+export const db = getFirestore();
 
 // collection ref
 export const colRef = collection(db, 'puzzles');

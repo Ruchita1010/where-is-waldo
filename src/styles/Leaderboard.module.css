@@ -1,0 +1,30 @@
+.leaderboardContainer {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+.leaderboardList {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.leaderboardEntry {
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 10px;
+  background-color: var(--bg-secondary);
+  font-size: clamp(0.9rem, 1vw + 1rem, 2rem);
+  text-align: center;
+  border-radius: 6px;
+}
+
+@media screen and (max-width: 768px) {
+  .leaderboardList {
+    width: 90%;
+  }
+}

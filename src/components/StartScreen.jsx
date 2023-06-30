@@ -1,17 +1,18 @@
 import { PuzzleCard } from './PuzzleCard';
 import { MessageScreen } from './MessageScreen';
 import { useDataFetch } from '../hooks/useDataFetch';
+import { getAllPuzzles } from '../firebase/firebaseDataActions';
 import styles from '../styles/StartScreen.module.css';
 
 export const StartScreen = ({ setActivePuzzle }) => {
-  /* setting a default value of an empty array ([]) to ensure that puzzles is always an array, even if the data is still loading */
-  const { data: puzzles = [], isLoading, error } = useDataFetch();
+  const { data: puzzles, isLoading, error } = useDataFetch(getAllPuzzles);
 
   if (isLoading) {
     return <MessageScreen message={'Loading...（︶^︶）'} />;
   }
 
   if (error) {
+    console.error(error);
     return <MessageScreen message={'Some Error Occurred...（╯^╰）'} />;
   }
 

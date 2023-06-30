@@ -1,18 +1,20 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { GameState } from './GameState';
 import { Puzzle } from './Puzzle';
 import { Modal } from './Modal';
 import { useTimer } from '../hooks/useTimer';
 import { useDisableScroll } from '../hooks/useDisableScroll';
+import { addToLeaderboard } from '../firebase/firebaseDataActions';
 import styles from '../styles/GameScreen.module.css';
 
 export const GameScreen = ({ puzzle }) => {
-  const { characters } = puzzle;
+  const { characters, id } = puzzle;
   const [foundCharacters, setFoundCharacters] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
+  const navigate = useNavigate();
   const [time, startTimer, clearTimer] = useTimer();
-
   // disables scroll when modal is open
   useDisableScroll(showModal);
 
@@ -24,8 +26,14 @@ export const GameScreen = ({ puzzle }) => {
   }, [foundCharacters]);
 
   const handleModalSubmit = (playerName) => {
-    console.log(`Player Name: ${playerName}`);
-    setShowModal(false);
+    addToLeaderboard({ playerName, time }, id)
+      .then(() => {
+        setShowModal(false);
+        navigate('/leaderboard');
+      })
+      .catch((error) => {
+        console.error('Error adding to leaderboard:', error);
+      });
   };
 
   const handleModalCancel = () => {
