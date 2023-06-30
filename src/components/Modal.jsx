@@ -25,6 +25,7 @@ export const Modal = ({ onSubmit, onCancel }) => {
           <input
             type="text"
             id="playerName"
+            maxLength={30}
             required
             value={playerName}
             onChange={handleInputChange}
