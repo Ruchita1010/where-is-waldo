@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { MessageScreen } from './MessageScreen';
 import { useDataFetch } from '../hooks/useDataFetch';
 import { getLeaderboardData } from '../firebase/firebaseDataActions';
@@ -22,7 +23,9 @@ export const Leaderboard = ({ puzzleId }) => {
   return (
     <div className={styles.leaderboard}>
       <nav>
-        <button className="btn">HOME</button>
+        <Link to="/">
+          <button className="btn">HOME</button>
+        </Link>
       </nav>
       <div className={styles.leaderboardContainer}>
         <div className={styles.leaderboardList}>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { GameState } from './GameState';
 import { Puzzle } from './Puzzle';
 import { Modal } from './Modal';
@@ -43,8 +43,12 @@ export const GameScreen = ({ puzzle }) => {
   return (
     <div className={styles.gameScreen}>
       <nav>
-        <button className="btn">HOME</button>
-        <button className="btn">LEADERBOARD</button>
+        <Link to="/">
+          <button className="btn">HOME</button>
+        </Link>
+        <Link to="/leaderboard">
+          <button className="btn">LEADERBOARD</button>
+        </Link>
       </nav>
       <GameState
         characters={characters}
