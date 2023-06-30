@@ -9,7 +9,7 @@ A puzzle game where users solve puzzles by identifying characters within an imag
 ✧ A timer to track the time taken to solve the puzzle<br>
 ✧ A leaderboard displaying the fastest times for each puzzle<br>
 
-### How to Play
+## How to Play
 
 **Select a Puzzle:** Choose a puzzle from the available options to play.
 
@@ -29,6 +29,15 @@ _NOTE: The timer will start automatically when the puzzle image finishes loading
 - [ ] Give user feedback on their selection
 - [ ] Enhance the leaderboard UI
 - [ ] Add more puzzles
+
+## Learnings
+
+✧ Firebase Storage (used for storing puzzle images and Firestore for app data)<br>
+✧ More about _useRef_ hook<br>
+✧ Measuring elapsed time, particularly _performance.now()_<br>
+✧ Disabling scroll when modal is open (once again)<br>
+✧ Making the modal container span the entire height of the page **regardless of the scroll position**<br>
+✧ Reminded that event object returned by React is a SyntheticEvent, but we can access the native event using _e.nativeEvent_
 
 ## Preview
 
